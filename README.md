@@ -34,8 +34,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Voyagerroc/sarihan-insaat-3.git
-   cd sarihan-insaat-3
+   git clone https://github.com/Voyagerroc/sarihan-interactive-showcase.git
+   cd sarihan-interactive-showcase
    ```
 
 2. Install dependencies:
