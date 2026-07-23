@@ -33,6 +33,7 @@ export default function VideoBanner() {
         muted
         playsInline
         preload="none"
+        poster="/images/insaat-deniz.jpg"
         className="absolute inset-0 w-full h-full object-cover object-center"
       >
         <source src="/videos/sarihan-deniz-cephesi.mp4" type="video/mp4" />

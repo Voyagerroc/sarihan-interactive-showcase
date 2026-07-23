@@ -30,7 +30,7 @@ export default function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section id="hero" ref={containerRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section id="hero" ref={containerRef} className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-[130%] -top-[15%]">
         <video
@@ -39,6 +39,7 @@ export default function Hero() {
           loop
           muted
           playsInline
+          poster="/images/bina1.jpg"
           className="w-full h-full object-cover will-change-transform"
         >
           <source src="/videos/sarihan-deniz-cephesi.mp4" type="video/mp4" />

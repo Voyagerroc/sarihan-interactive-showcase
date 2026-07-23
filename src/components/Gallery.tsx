@@ -34,26 +34,27 @@ export default function Gallery() {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    // Create the infinite marquee animation
-    // Move the container by -50% (since we duplicated the content, -50% means moving exactly 1 set of items)
-    const marqueeTween = gsap.to(slider, {
-      xPercent: -50,
-      ease: "none",
-      repeat: -1,
-      duration: 30, // Base duration
-    });
+    // Check if device is touch or screen is small
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    // Hover effect to slow down
-    slider.addEventListener("mouseenter", () => {
-      gsap.to(marqueeTween, { timeScale: 0.2, duration: 0.5, overwrite: "auto" });
-    });
-    
-    slider.addEventListener("mouseleave", () => {
-      gsap.to(marqueeTween, { timeScale: 1, duration: 0.5, overwrite: "auto" });
-    });
+    if (!isMobile) {
+      // Create the infinite marquee animation only for desktop
+      const marqueeTween = gsap.to(slider, {
+        xPercent: -50,
+        ease: "none",
+        repeat: -1,
+        duration: 30, // Base duration
+      });
 
-    // Optional: Add some very subtle scroll sync if needed, but for now we just use a constant slow pan.
-    // The user found the fast movement during scroll annoying.
+      // Hover effect to slow down
+      slider.addEventListener("mouseenter", () => {
+        gsap.to(marqueeTween, { timeScale: 0.2, duration: 0.5, overwrite: "auto" });
+      });
+      
+      slider.addEventListener("mouseleave", () => {
+        gsap.to(marqueeTween, { timeScale: 1, duration: 0.5, overwrite: "auto" });
+      });
+    }
 
   }, { scope: sectionRef });
 
@@ -65,14 +66,14 @@ export default function Gallery() {
         <p className="text-lg text-slate-600 max-w-2xl mx-auto">Sarıhan İnşaat 3 projesinin inşaat sürecinden bitmiş haline tüm detayları keşfedin.</p>
       </div>
 
-      <div className="relative flex items-center overflow-hidden">
+      <div className="relative flex items-center overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-4">
         <div 
           ref={sliderRef} 
           className="flex gap-6 px-[5vw] flex-nowrap w-max"
           style={{ scrollbarWidth: 'none', willChange: 'transform' }}
         >
           {repeatedItems.map((item, idx) => (
-            <figure key={idx} className="relative flex-none w-[70vw] md:w-[40vw] lg:w-[25vw] aspect-video cursor-pointer overflow-hidden rounded-2xl border border-gray-200 hover:border-amber-500 transition-colors shadow-lg bg-white p-2">
+            <figure key={idx} className="snap-center shrink-0 relative flex-none w-[80vw] md:w-[40vw] lg:w-[25vw] aspect-video cursor-pointer overflow-hidden rounded-2xl border border-gray-200 hover:border-amber-500 transition-colors shadow-lg bg-white p-2">
               {item.type === "image" ? (
                 <img src={item.src} alt={item.title} className="w-full h-full object-cover rounded-xl" />
               ) : (
