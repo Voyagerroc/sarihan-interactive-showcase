@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
 import MagneticButton from "./ui/MagneticButton";
-import CraneSVG from "./ui/CraneSVG";
 
 gsap.registerPlugin(ScrollTrigger);
 
