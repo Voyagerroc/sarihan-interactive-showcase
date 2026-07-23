@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Building2 } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const navLinks = [
   { name: "Anasayfa", href: "#hero" },
@@ -13,8 +14,13 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("#hero");
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname !== "/") return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
@@ -35,11 +41,25 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    // Also set scrolled state regardless of page for styling
+    const handleBasicScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleBasicScroll);
+    return () => window.removeEventListener("scroll", handleBasicScroll);
   }, []);
 
   const scrollTo = (href: string) => {
     setMobileMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== "/") {
+      navigate("/" + href);
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (

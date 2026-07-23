@@ -52,29 +52,8 @@ export default function Gallery() {
       gsap.to(marqueeTween, { timeScale: 1, duration: 0.5, overwrite: "auto" });
     });
 
-    // Scroll speed sync
-    ScrollTrigger.create({
-      trigger: document.documentElement,
-      start: 0,
-      end: "max",
-      onUpdate: (self) => {
-        // Increase speed based on scroll velocity (absolute value)
-        const velocity = Math.abs(self.getVelocity());
-        if (velocity > 0) {
-          // Map velocity to a timeScale modifier (e.g. max timeScale around 4)
-          let targetScale = 1 + (velocity / 500);
-          gsap.to(marqueeTween, { 
-            timeScale: targetScale, 
-            duration: 0.1, // Quick response
-            overwrite: "auto",
-            onComplete: () => {
-              // Return to normal speed when not scrolling fast
-              gsap.to(marqueeTween, { timeScale: 1, duration: 0.5, overwrite: "auto" });
-            }
-          });
-        }
-      }
-    });
+    // Optional: Add some very subtle scroll sync if needed, but for now we just use a constant slow pan.
+    // The user found the fast movement during scroll annoying.
 
   }, { scope: sectionRef });
 

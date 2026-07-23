@@ -3,11 +3,14 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 import MagneticButton from "./ui/MagneticButton";
+import CraneSVG from "./ui/CraneSVG";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -83,9 +86,7 @@ export default function Hero() {
         >
           <MagneticButton
             className="px-10 py-4 bg-white text-slate-900 font-bold rounded-full hover:bg-gray-100 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.3)]"
-            onClick={() => {
-              document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            onClick={() => navigate('/proje')}
           >
             Projeyi Keşfet ✨
           </MagneticButton>

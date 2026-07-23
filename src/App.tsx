@@ -2,29 +2,25 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import CustomCursor from "./components/ui/CustomCursor";
 
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import Presentation from "./components/Presentation";
-import Gallery from "./components/Gallery";
-import VideoBanner from "./components/VideoBanner";
-import Contact from "./components/Contact";
+import HomePage from "./pages/HomePage";
+import ProjectFiles from "./pages/ProjectFiles";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
+function ScrollToTop() {
+  const { pathname } = useLocation();
   useEffect(() => {
-    // Media query to avoid heavy animations on mobile/reduced-motion
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+function AppContent() {
+  useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
@@ -38,7 +34,7 @@ function App() {
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time)=>{
+    gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
     
@@ -53,21 +49,26 @@ function App() {
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden font-sans">
       <CustomCursor />
       <Navbar />
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-amber-500 origin-left z-[9999]"
-        style={{ scaleX }}
-      />
-      <Hero />
-      <Features />
-      <Presentation />
-      <Gallery />
-      <VideoBanner />
-      <Contact />
+      <ScrollToTop />
+      
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/proje" element={<ProjectFiles />} />
+      </Routes>
+
       <footer className="py-8 text-center bg-black text-white/50 text-sm relative z-10">
         <p>© {new Date().getFullYear()} Sarıhan İnşaat. Tüm Hakları Saklıdır.</p>
         <p className="mt-2 text-white/30">Developed with Magic UI</p>
       </footer>
     </main>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 

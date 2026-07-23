@@ -93,8 +93,8 @@ export default function Presentation() {
             </ul>
           </div>
 
-          {/* Shops & Contractor */}
-          <div className="space-y-8">
+          {/* Shops */}
+          <div className="space-y-8 lg:mt-12">
             <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-xl relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Building2 size={120} />
@@ -114,14 +114,6 @@ export default function Presentation() {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl border border-gray-200 shadow-sm flex items-center gap-6 hover:shadow-md transition-shadow">
-              <img src="/images/adnan-sarihan-2.jpg" alt="Adnan Sarıhan" className="w-24 h-24 rounded-full object-cover border-4 border-amber-100" />
-              <div>
-                <h4 className="text-xl font-bold text-slate-900">Adnan Sarıhan</h4>
-                <p className="text-amber-600 font-medium">Müteahhit & Proje Yöneticisi</p>
               </div>
             </div>
           </div>
