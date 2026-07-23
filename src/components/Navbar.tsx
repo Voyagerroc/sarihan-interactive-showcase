@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Building2 } from "lucide-react";
 
 const navLinks = [
   { name: "Anasayfa", href: "#hero" },
@@ -49,8 +50,14 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          <div className="text-white font-bold tracking-widest uppercase cursor-pointer text-xl" onClick={() => scrollTo("#hero")}>
-            Sarıhan<span className="text-amber-500">.</span>
+          <div className="text-white font-bold tracking-widest uppercase cursor-pointer text-xl flex items-center gap-3" onClick={() => scrollTo("#hero")}>
+            <div className="bg-amber-500 p-1.5 rounded-lg text-slate-900 shadow-lg shadow-amber-500/20">
+              <Building2 size={24} strokeWidth={2.5} />
+            </div>
+            <div className="flex flex-col items-start leading-none gap-1">
+              <span>Sarıhan</span>
+              <span className="text-amber-500 text-xs font-semibold tracking-[0.15em]">İnşaat LTD. ŞTİ.</span>
+            </div>
           </div>
 
           {/* Desktop Nav */}

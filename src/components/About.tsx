@@ -1,9 +1,9 @@
 import { Target, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function Features() {
+export default function About() {
   return (
-    <section id="features" className="py-24 bg-gray-50 px-4 md:px-12 overflow-hidden">
+    <section id="about" className="py-24 bg-gray-50 px-4 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <span className="text-amber-600 font-semibold uppercase tracking-widest text-sm">Hakkımızda</span>
